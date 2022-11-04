@@ -17,10 +17,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/inc
 )
 
-# Create target and set properties.
-set(SOURCE_FILES
-    ./src/main.cpp
-    ./src/Problem.cpp
-)
+file(GLOB source_files CONFIGURE_DEPENDS "./src/*.cpp")
 
-add_executable(main ${SOURCE_FILES})
+add_executable(main ${source_files})
