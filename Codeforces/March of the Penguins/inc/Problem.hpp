@@ -4,14 +4,12 @@
 #include <vector>
 #include "IceCube.hpp"
 
-using namespace std;
-
 
 class Problem {
 private:
     float _jumping_distance;
-    vector<IceCube> _ice_cubes;
-    vector<int> _results;
+    std::vector<IceCube> _ice_cubes;
+    std::vector<int> _results;
 
 public:
     void solve();

@@ -1,5 +1,7 @@
 #include "Problem.hpp"
 
+using namespace std;
+
 
 void Problem::solve() {
     // TODO
