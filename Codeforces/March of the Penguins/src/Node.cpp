@@ -14,9 +14,9 @@ void Node::addEdge(Edge&& edge) {
 }
 
 
-int Node::sum_capacity() {
+int Node::sum_capacity() const {
     int res = 0;
-    for (auto& edge : _edges) {
+    for (const auto& edge : _edges) {
         res += edge._capacity;
     }
     return res;

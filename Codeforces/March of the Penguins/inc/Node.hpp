@@ -14,10 +14,10 @@ private:
     std::vector<Edge> _edges;
 
 public:
-    Node(size_t id);
+    explicit Node(size_t id);
 
     void addEdge(Edge& edge);
     void addEdge(Edge&& edge);
 
-    int sum_capacity();
+    int sum_capacity() const;
 };
