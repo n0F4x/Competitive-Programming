@@ -2,6 +2,7 @@
 
 #include <queue>
 #include <algorithm>
+#include <set>
 
 
 Graph::Graph(const std::vector<std::shared_ptr<Node>>& nodes) : _nodes{ nodes } {}
@@ -22,13 +23,13 @@ std::unique_ptr<std::vector<std::vector<Edge*>>> Graph::make_level_graph(
 ) {
 	auto level_graph{ std::make_unique<std::vector<std::vector<Edge*>>>() };
 	bool reached_target = false;
-	std::vector<size_t> visited;
-	std::vector<size_t> visited_frontier;
+	std::set<size_t> visited;
+	std::set<size_t> visited_frontier;
 	std::queue<std::vector<Edge*>> paths;
 	for (auto& edge : source->_edges) {
 		if (edge._capacity - edge._flow > 0) {
 			paths.push({ &edge });
-			visited.push_back(edge._to->_id);
+			visited.emplace(edge._to->_id);
 			if (edge._to->_id == target->_id) {
 				reached_target = true;
 				level_graph->push_back(paths.back());
@@ -45,7 +46,7 @@ std::unique_ptr<std::vector<std::vector<Edge*>>> Graph::make_level_graph(
 					auto new_path{ path };
 					new_path.push_back(&edge);
 					paths.push(new_path);
-					visited_frontier.push_back(edge._to->_id);
+					visited_frontier.emplace(edge._to->_id);
 					if (edge._to->_id == target->_id) {
 						reached_target = true;
 						level_graph->push_back(new_path);
@@ -54,11 +55,11 @@ std::unique_ptr<std::vector<std::vector<Edge*>>> Graph::make_level_graph(
 			}
 		}
 		for (auto id : visited_frontier) {
-			visited.push_back(id);
+			visited.emplace(id);
 		}
 		visited_frontier.clear();
 	}
-	return std::move(level_graph);
+	return level_graph;
 }
 
 
