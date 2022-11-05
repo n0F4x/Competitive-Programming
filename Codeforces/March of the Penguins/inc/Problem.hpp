@@ -9,11 +9,11 @@ class Problem {
 private:
     float _jumping_distance;
     std::vector<IceCube> _ice_cubes;
-    std::vector<int> _results;
+    std::vector<size_t> _results;
 
 public:
     void solve();
 
-    friend istream &operator>>(istream &is, Problem &problem);
-    friend ostream &operator<<(ostream &os, const Problem &problem);
+    friend std::istream &operator>>(std::istream &is, Problem &problem);
+    friend std::ostream &operator<<(std::ostream &os, const Problem &problem);
 };
